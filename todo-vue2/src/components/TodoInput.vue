@@ -39,5 +39,7 @@ export default {
   width: 100%;
   padding: 8px 10px;
   max-width: 500px;
+  border: 3px solid black;
+  border-radius: 5px;
 }
 </style>
