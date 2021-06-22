@@ -1,0 +1,9 @@
+How to generate vue files?
+
+How to auto import vue files, like when components defined?
+
+Make:
+With vue 2 + vuetify
+With vue 2 + vuetify + jsx
+Optional With vue 2 + TS + vuetify (also TSX?)
+With vue 3 + TS
