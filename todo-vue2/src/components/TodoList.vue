@@ -10,6 +10,7 @@
       </li>
     </ul>
     <div v-if="todos.length === 0">All done!</div>
+    <h2>You have {{todosLeft}} things TODO!</h2>
   </div>
 </template>
 
@@ -33,6 +34,14 @@ export default {
   },
   created: function() {
     console.log("TodoList created with: ", this.todos);
+  },
+  computed: {
+    todosLeft: function() {
+      if (Array.isArray(this.todos)) {
+        return this.todos.length;
+      }
+      return 0;
+    },
   },
 };
 </script>
