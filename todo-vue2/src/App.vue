@@ -7,7 +7,11 @@
       :todos="todos"
       @remove-todo-id="removeTodo($event)"
       @toggle-done-todo="toggleDone($event)"
-    />
+    >
+      <template v-slot:default="slotProps"
+        >You have {{ slotProps.todosLeft }} things TODO!</template
+      >
+    </TodoList>
   </div>
 </template>
 
