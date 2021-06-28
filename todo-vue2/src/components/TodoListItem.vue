@@ -9,9 +9,9 @@
       >
         {{ todo.text }}</span
       >
-      <v-btn class="x-button" elevation="2" @click="removeItem(todo.id)"
-        >X</v-btn
-      >
+      <v-btn class="x-button" elevation="2" @click="removeItem(todo.id)">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
     </div>
   </v-expand-x-transition>
 </template>
