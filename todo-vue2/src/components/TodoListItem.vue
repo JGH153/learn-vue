@@ -4,6 +4,7 @@
       <span
         class="todo-text"
         @click="toggleDone(todo.id)"
+        v-striked="todo.done"
         :class="{ striked: todo.done }"
       >
         {{ todo.text }}</span
@@ -47,7 +48,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .striked {
-  text-decoration: line-through;
+  // text-decoration: line-through; Moved to directive
+  color: grey;
 }
 .todo-text {
   cursor: pointer;
