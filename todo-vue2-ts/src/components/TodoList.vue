@@ -14,34 +14,32 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { Todos } from "../shared/models/todos.interface";
 import TodoListItem from "./TodoListItem.vue";
-export default {
-  name: "TodoList",
+
+@Component({
   components: {
     TodoListItem,
   },
-  props: {
-    todos: {
-      type: Array,
-      required: true,
-    },
-  },
-  created: function() {
+})
+export default class TodoList extends Vue {
+  @Prop() private todos!: Todos;
+  
+  created() {
     console.log("TodoList created with: ", this.todos);
-  },
-  computed: {
-    todosLeft: function() {
-      if (Array.isArray(this.todos)) {
-        return this.todos.length;
-      }
-      return 0;
-    },
-  },
-};
+  }
+
+  get todosLeft() {
+    if (Array.isArray(this.todos)) {
+      return this.todos.length;
+    }
+    return 0;
+  }
+}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .todo-list {
   display: flex;

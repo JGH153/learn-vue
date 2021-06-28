@@ -4,7 +4,8 @@ How to auto import vue files, like when components defined?
 
 Make:
 V With vue 2 + vuetify
-With vue 2 + vuetify + jsx
+V With vue 2 + vuetify + TS
+V With vue 2 + vuetify + TS + TSX
 With vue 2 + vuetify + vuex
 With vue 2 + TS + vuetify (also TSX?)
 With vue 3 + TS
