@@ -3,7 +3,7 @@
     <div class="list-item-container" v-show="expanded">
       <span
         class="todo-text"
-        @click="toggleDone(todo.id)"
+        @click="onToggleDone(todo.id)"
         v-striked="todo.done"
         :class="{ striked: todo.done }"
       >
@@ -18,10 +18,18 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { mapMutations } from "vuex";
 import { Todo } from "../shared/models/todo.interface";
 
-@Component
+@Component({
+  methods: {
+    ...mapMutations(["toggleDone", "removeTodoById"]),
+  },
+})
 export default class TodoListItem extends Vue {
+  toggleDone!: (id: number) => void; //typedef for mapMutations toggleDone
+  removeTodoById!: (id: number) => void; //typedef for mapMutations removeTodoById
+
   @Prop() private todo!: Todo;
   expanded = true;
 
@@ -29,16 +37,15 @@ export default class TodoListItem extends Vue {
     this.expanded = !this.expanded;
 
     setTimeout(() => {
-      this.$emit("remove-todo-id", id);
+      this.removeTodoById(id);
     }, 200);
   }
-  toggleDone(id: number): void {
-    this.$emit("toggle-done-todo", id);
+  onToggleDone(id: number): void {
+    this.toggleDone(id);
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .striked {
   // text-decoration: line-through; Moved to directive

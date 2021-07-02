@@ -11,18 +11,40 @@
 </template>
 
 <script lang="ts">
+import { Todo } from "@/shared/models/todo.interface";
 import { Component, Vue } from "vue-property-decorator";
+import { mapGetters, mapMutations } from "vuex";
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters(["getLastId"]),
+  },
+  methods: {
+    ...mapMutations(["addNewTodo"]),
+  },
+})
 export default class TodoInput extends Vue {
+  getLastId!: number; //typedef for mapGetters getLastId
+  addNewTodo!: (newTodo: Todo) => void; //typedef for mapMutations addNewTodo
+
   newTodoText = "";
 
   onTodoEnter(): void {
     if (this.newTodoText === "") {
       return;
     }
-    this.$emit("new-data-event", this.newTodoText);
+    this.onNewTodo(this.newTodoText);
     this.newTodoText = "";
+  }
+
+  onNewTodo(newTodoText: string): void {
+    const newTodoId = this.getLastId + 1;
+    const newTodo = {
+      id: newTodoId,
+      done: false,
+      text: newTodoText,
+    };
+    this.addNewTodo(newTodo);
   }
 }
 </script>

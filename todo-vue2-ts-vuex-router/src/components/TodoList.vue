@@ -2,11 +2,7 @@
   <div>
     <ul class="todo-list">
       <li v-for="todo in todos" :key="todo.id" class="list-item">
-        <TodoListItem
-          :todo="todo"
-          @remove-todo-id="$emit('remove-todo-id', $event)"
-          @toggle-done-todo="$emit('toggle-done-todo', $event)"
-        />
+        <TodoListItem :todo="todo" />
       </li>
     </ul>
     <div v-if="todos.length === 0">All done!</div>
@@ -17,9 +13,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import { mapGetters, mapState } from "vuex";
-import { Todo } from "../shared/models/todo.interface";
 import TodoListItem from "./TodoListItem.vue";
 
 @Component({
@@ -33,35 +28,20 @@ import TodoListItem from "./TodoListItem.vue";
     ...mapState({
       // assuming IMyModuleState.items
       todosLeft: (state: any) => state.todos.length,
+      // todo state interface
+      todos: (state: any) => state.todos,
+      isLoading: (state: any) => state.loading,
     }),
     ...mapGetters(["doneTodos"]),
   },
   methods: {
-    ...mapGetters(["getTodoById"]),
+    ...mapGetters([""]),
   },
 })
 export default class TodoList extends Vue {
-  // getTodoById!: (id: number) => Todo;
-  getTodoById!: any;
-
-  @Prop() private todos!: Todo;
-
   created(): void {
-    console.log(
-      "TodoList created with: ",
-      this.$store.state.todos,
-      "|",
-      this.getTodoById()(1),
-      this.$store.getters.getTodoById(1)
-    );
+    console.log("TodoList created with: ", this.$store.state.todos);
   }
-
-  // get todosLeft(): number {
-  //   if (Array.isArray(this.todos)) {
-  //     return this.todos.length;
-  //   }
-  //   return 0;
-  // }
 }
 </script>
 
