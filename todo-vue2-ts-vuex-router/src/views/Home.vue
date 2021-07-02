@@ -13,15 +13,17 @@
         TODO!</template
       >
     </TodoList>
+    <h3>Comp: {{ getLastId }} | {{ testMe }}</h3>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { mapGetters, mapMutations } from "vuex";
 import HelloWorld from "./../components/HelloWorld.vue";
 import TodoInput from "./../components/TodoInput.vue";
 import TodoList from "./../components/TodoList.vue";
-import { Todos } from "./../shared/models/todos.interface";
+import { Todo } from "../shared/models/todo.interface";
 
 @Component({
   components: {
@@ -29,9 +31,22 @@ import { Todos } from "./../shared/models/todos.interface";
     TodoInput,
     TodoList,
   },
+  computed: {
+    ...mapGetters(["getLastId"]),
+    testMe() {
+      return 55;
+    },
+  },
+  methods: {
+    ...mapMutations(["addNewTodo"]),
+    // ...mapGetters(["getLastId"]),
+  },
 })
 export default class App extends Vue {
-  todos: Todos[] = [
+  // getLastId!: () => number; //typedef for mapGetters getLastId
+  getLastId!: number; //typedef for mapGetters getLastId
+  addNewTodo!: (newTodo: Todo) => void; //typedef for mapMutations addNewTodo
+  todos: Todo[] = [
     {
       id: 0,
       done: false,
@@ -49,15 +64,31 @@ export default class App extends Vue {
     },
   ];
 
-  onNewTodo(newTodo: string): void {
-    this.todos.push({
-      id: this.getLastId() + 1,
+  created(): void {
+    // console.log(this.testMe());
+  }
+
+  onNewTodo(newTodoText: string): void {
+    const newTodoId = this.getLastId;
+    // const newTodoId = this.$store.getters.getLastId();
+    // const newTodoId = 5;
+    // should be action?
+    const newTodo = {
+      id: newTodoId,
       done: false,
-      text: newTodo,
+      text: newTodoText,
+    };
+    console.log("commit!");
+    this.addNewTodo(newTodo);
+    // this.$store.commit("addNewTodo", newTodo);
+    this.todos.push({
+      id: this.getLastIdOld() + 1,
+      done: false,
+      text: newTodoText,
     });
   }
 
-  getLastId(): number {
+  getLastIdOld(): number {
     if (this.todos.length > 0) {
       return this.todos[this.todos.length - 1].id;
     }

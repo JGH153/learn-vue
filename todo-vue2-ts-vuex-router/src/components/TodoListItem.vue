@@ -18,11 +18,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Todos } from "../shared/models/todos.interface";
+import { Todo } from "../shared/models/todo.interface";
 
 @Component
 export default class TodoListItem extends Vue {
-  @Prop() private todo!: Todos;
+  @Prop() private todo!: Todo;
   expanded = true;
 
   removeItem(id: number): void {

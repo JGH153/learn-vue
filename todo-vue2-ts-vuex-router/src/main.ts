@@ -4,6 +4,9 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 
+import "./directives/Striked";
+import "./filters/NumberToText";
+
 Vue.config.productionTip = false;
 
 new Vue({

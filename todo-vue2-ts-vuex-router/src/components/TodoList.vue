@@ -11,32 +11,57 @@
     </ul>
     <div v-if="todos.length === 0">All done!</div>
     <h2><slot v-bind:todosLeft="todosLeft"></slot></h2>
+    {{ test }}
+    <h2>You have {{ doneTodos }} done TODO's</h2>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Todos } from "../shared/models/todos.interface";
+import { mapGetters, mapState } from "vuex";
+import { Todo } from "../shared/models/todo.interface";
 import TodoListItem from "./TodoListItem.vue";
 
 @Component({
   components: {
     TodoListItem,
   },
+  computed: {
+    test() {
+      return "Another computed!";
+    },
+    ...mapState({
+      // assuming IMyModuleState.items
+      todosLeft: (state: any) => state.todos.length,
+    }),
+    ...mapGetters(["doneTodos"]),
+  },
+  methods: {
+    ...mapGetters(["getTodoById"]),
+  },
 })
 export default class TodoList extends Vue {
-  @Prop() private todos!: Todos;
-  
-  created() {
-    console.log("TodoList created with: ", this.todos);
+  // getTodoById!: (id: number) => Todo;
+  getTodoById!: any;
+
+  @Prop() private todos!: Todo;
+
+  created(): void {
+    console.log(
+      "TodoList created with: ",
+      this.$store.state.todos,
+      "|",
+      this.getTodoById()(1),
+      this.$store.getters.getTodoById(1)
+    );
   }
 
-  get todosLeft() {
-    if (Array.isArray(this.todos)) {
-      return this.todos.length;
-    }
-    return 0;
-  }
+  // get todosLeft(): number {
+  //   if (Array.isArray(this.todos)) {
+  //     return this.todos.length;
+  //   }
+  //   return 0;
+  // }
 }
 </script>
 
