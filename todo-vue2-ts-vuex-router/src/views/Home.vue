@@ -39,7 +39,7 @@ import TodoList from "./../components/TodoList.vue";
     TodoList,
   },
   computed: {
-    ...mapGetters(["getLastId"]),
+    ...mapGetters("todo", ["getLastId"]),
     testMe() {
       return 55;
     },
@@ -48,7 +48,7 @@ import TodoList from "./../components/TodoList.vue";
     }),
   },
   methods: {
-    ...mapActions(["loadTodos"]),
+    ...mapActions("todo", ["loadTodos"]),
   },
 })
 export default class App extends Vue {
@@ -56,7 +56,6 @@ export default class App extends Vue {
   loadTodos!: () => void;
 
   created(): void {
-    // console.log(this.getLastId);
     this.loadTodos();
   }
 }

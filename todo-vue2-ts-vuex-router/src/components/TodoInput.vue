@@ -17,10 +17,10 @@ import { mapGetters, mapMutations } from "vuex";
 
 @Component({
   computed: {
-    ...mapGetters(["getLastId"]),
+    ...mapGetters("todo", ["getLastId"]),
   },
   methods: {
-    ...mapMutations(["addNewTodo"]),
+    ...mapMutations("todo", ["addNewTodo"]),
   },
 })
 export default class TodoInput extends Vue {

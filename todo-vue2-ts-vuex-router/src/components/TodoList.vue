@@ -27,20 +27,17 @@ import TodoListItem from "./TodoListItem.vue";
     },
     ...mapState({
       // assuming IMyModuleState.items
-      todosLeft: (state: any) => state.todos.length,
+      todosLeft: (state: any) => state.todo.todos.length,
       // todo state interface
-      todos: (state: any) => state.todos,
+      todos: (state: any) => state.todo.todos,
       isLoading: (state: any) => state.loading,
     }),
-    ...mapGetters(["doneTodos"]),
-  },
-  methods: {
-    ...mapGetters([""]),
+    ...mapGetters("todo", ["doneTodos"]),
   },
 })
 export default class TodoList extends Vue {
   created(): void {
-    console.log("TodoList created with: ", this.$store.state.todos);
+    console.log("TodoList created with: ", this.$store.state.todo.todos);
   }
 }
 </script>
