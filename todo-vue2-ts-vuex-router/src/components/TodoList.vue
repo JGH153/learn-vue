@@ -28,9 +28,7 @@ import TodoListItem from "./TodoListItem.vue";
       return "Another computed!";
     },
     ...mapState<StoreState>({
-      // assuming IMyModuleState.items
       todosLeft: (state: StoreState) => state.todo.todos.length,
-      // todo state interface
       todos: (state: StoreState) => state.todo.todos,
     }),
     ...mapState<RootStoreState>({
