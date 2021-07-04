@@ -13,6 +13,8 @@
 </template>
 
 <script lang="ts">
+import { RootStoreState } from "@/store/root-store.state.interface";
+import { StoreState } from "@/store/store.state.interface";
 import { Component, Vue } from "vue-property-decorator";
 import { mapGetters, mapState } from "vuex";
 import TodoListItem from "./TodoListItem.vue";
@@ -25,12 +27,14 @@ import TodoListItem from "./TodoListItem.vue";
     test() {
       return "Another computed!";
     },
-    ...mapState({
+    ...mapState<StoreState>({
       // assuming IMyModuleState.items
-      todosLeft: (state: any) => state.todo.todos.length,
+      todosLeft: (state: StoreState) => state.todo.todos.length,
       // todo state interface
-      todos: (state: any) => state.todo.todos,
-      isLoading: (state: any) => state.loading,
+      todos: (state: StoreState) => state.todo.todos,
+    }),
+    ...mapState<RootStoreState>({
+      isLoading: (state: RootStoreState) => state.isLoading,
     }),
     ...mapGetters("todo", ["doneTodos"]),
   },

@@ -18,15 +18,14 @@
 </template>
 
 <script lang="ts">
+import { RootStoreState } from "@/store/root-store.state.interface";
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { mapActions, mapGetters, mapState } from "vuex";
-import HelloWorld from "./../components/HelloWorld.vue";
 import TodoInput from "./../components/TodoInput.vue";
 import TodoList from "./../components/TodoList.vue";
 
 @Component({
   components: {
-    HelloWorld,
     TodoInput,
     TodoList,
   },
@@ -35,8 +34,8 @@ import TodoList from "./../components/TodoList.vue";
     testMe() {
       return 55;
     },
-    ...mapState({
-      isLoading: (state: any) => state.isLoading,
+    ...mapState<RootStoreState>({
+      isLoading: (state: RootStoreState) => state.isLoading,
     }),
   },
   methods: {

@@ -1,8 +1,9 @@
 import { ServerTodo } from "@/shared/models/server-todo.interface";
 import { Todo } from "@/shared/models/todo.interface";
 import { Commit } from "vuex";
+import { TodosStoreState } from "./todos.store.interface";
 
-// TODO state interface
+// TODO try divided pattern: https://stackoverflow.com/questions/53807294/how-is-the-correct-way-to-work-with-vuex-and-typescript
 export const TodosModules = {
   namespaced: true,
   state: () => ({
@@ -25,16 +26,13 @@ export const TodosModules = {
     ],
   }),
   mutations: {
-    addNewTodo(state: any, newTodo: Todo) {
-      console.log("adding!");
+    addNewTodo(state: TodosStoreState, newTodo: Todo) {
       state.todos = [...state.todos, newTodo];
     },
-    removeTodoById(state: any, id: number) {
-      state.todos = state.todos.filter(
-        (currentTodo: Todo) => currentTodo.id !== id
-      );
+    removeTodoById(state: TodosStoreState, id: number) {
+      state.todos = state.todos.filter((currentTodo: Todo) => currentTodo.id !== id);
     },
-    toggleDone(state: any, id: number) {
+    toggleDone(state: TodosStoreState, id: number) {
       state.todos = state.todos.map((currentTodo: Todo) => {
         if (currentTodo.id === id) {
           return {
@@ -52,9 +50,7 @@ export const TodosModules = {
   actions: {
     async loadTodos({ commit }: { commit: Commit }) {
       commit("setLoading", true, { root: true });
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos/"
-      );
+      const response = await fetch("https://jsonplaceholder.typicode.com/todos/");
       // make it fake slower
       await new Promise((resolve) => {
         setTimeout(resolve, 300);
@@ -74,10 +70,10 @@ export const TodosModules = {
   },
   modules: {},
   getters: {
-    doneTodos: (state: any) => {
+    doneTodos: (state: TodosStoreState) => {
       return state.todos.filter((todo: Todo) => todo.done).length;
     },
-    getLastId: (state: any) => {
+    getLastId: (state: TodosStoreState) => {
       if (state.todos.length > 0) {
         return state.todos[state.todos.length - 1].id;
       }
