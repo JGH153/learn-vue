@@ -1,14 +1,11 @@
 <template>
   <v-expand-x-transition>
     <div class="list-item-container" v-show="expanded">
-      <span
-        class="todo-text"
-        @click="onToggleDone(todo.id)"
-        v-striked="todo.done"
-        :class="{ striked: todo.done }"
-      >
+      <span class="todo-text" @click="onToggleDone(todo.id)" v-striked="todo.done" :class="{ striked: todo.done }">
         {{ todo.text }}</span
       >
+      <router-link :to="'/todo/' + todo.id">Open</router-link>
+
       <v-btn class="x-button" elevation="2" @click="removeItem(todo.id)">
         <v-icon>mdi-close</v-icon>
       </v-btn>
