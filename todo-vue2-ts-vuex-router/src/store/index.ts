@@ -7,8 +7,10 @@ import { RootStoreState } from "./root-store.state.interface";
 
 Vue.use(Vuex);
 
+const production = process.env.NODE_ENV === "production";
+
 export default new Vuex.Store({
-  strict: true, // TODO disable in prod
+  strict: !production, // TODO disable in prod
   state: {
     isLoading: false,
   },

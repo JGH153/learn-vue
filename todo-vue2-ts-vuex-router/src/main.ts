@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 
+// use index pattern in folders?
 import "./directives/Striked";
 import "./filters/NumberToText";
 
