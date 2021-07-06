@@ -12,19 +12,22 @@
       <TodoList>
         <template v-slot:default="slotProps">You have {{ slotProps.todosLeft | numberToText }} things TODO!</template>
       </TodoList>
-      <h3>Comp: last id: {{ getLastId }} | {{ testMe }}</h3>
+      <h3>Comp: last id: {{ getLastId }} | {{ testMe }} | {{ someValue }}</h3>
+      <h3 v-if="myBookType === BookType.Documentation">My book is documentation!</h3>
     </template>
   </div>
 </template>
 
 <script lang="ts">
+import { BookType } from "@/shared/models/enums/book-type.enum";
 import { RootStoreState } from "@/store/root-store.state.interface";
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { mapActions, mapGetters, mapState } from "vuex";
 import TodoInput from "./../components/TodoInput.vue";
 import TodoList from "./../components/TodoList.vue";
 
-@Component({
+// type of Home so someValue can access class values
+@Component<Home>({
   components: {
     TodoInput,
     TodoList,
@@ -34,6 +37,9 @@ import TodoList from "./../components/TodoList.vue";
     testMe() {
       return 55;
     },
+    someValue() {
+      return this.someCompValue;
+    },
     ...mapState<RootStoreState>({
       isLoading: (state: RootStoreState) => state.isLoading,
     }),
@@ -42,9 +48,13 @@ import TodoList from "./../components/TodoList.vue";
     ...mapActions("todo", ["loadTodos"]),
   },
 })
-export default class App extends Vue {
+export default class Home extends Vue {
   // getLastId!: number; //typedef for mapGetters getLastId
   loadTodos!: () => void;
+  readonly BookType = BookType; // can now use enum in template
+
+  myBookType = BookType.Documentation;
+  someCompValue = "A value";
 
   @Watch("isLoading")
   onIsLoadingChanged(value: string, oldValue: string): void {

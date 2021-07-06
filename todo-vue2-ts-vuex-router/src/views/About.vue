@@ -8,7 +8,7 @@
 <script lang="ts">
 import AlertMixin from "@/mixins/Alert.mixin";
 import { mixins } from "vue-class-component";
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 
 @Component
 export default class About extends mixins(AlertMixin) {

@@ -6,7 +6,7 @@ import Component from "vue-class-component";
 export default class AlertMixin extends Vue {
   alertPrefix = "Alert: ";
 
-  triggerAlert(message: string) {
+  triggerAlert(message: string): void {
     alert(this.alertPrefix + message);
   }
 

@@ -1,12 +1,6 @@
 <template>
   <div>
-    <input
-      type="text"
-      class="todo-input"
-      v-model="newTodoText"
-      @keydown.enter="onTodoEnter"
-      autofocus
-    />
+    <input type="text" class="todo-input" v-model="newTodoText" @keydown.enter="onTodoEnter" autofocus />
   </div>
 </template>
 

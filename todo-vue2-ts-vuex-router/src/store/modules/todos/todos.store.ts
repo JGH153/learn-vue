@@ -1,7 +1,7 @@
 import { ServerTodo } from "@/shared/models/server-todo.interface";
 import { Todo } from "@/shared/models/todo.interface";
 import { RootStoreState } from "@/store/root-store.state.interface";
-import { ActionTree, Commit, GetterTree, MutationTree } from "vuex";
+import { ActionTree, GetterTree, MutationTree } from "vuex";
 import { TodosStoreState } from "./todos.store.interface";
 
 // TODO try divided pattern: https://stackoverflow.com/questions/53807294/how-is-the-correct-way-to-work-with-vuex-and-typescript
@@ -46,7 +46,7 @@ const mutations = <MutationTree<TodosStoreState>>{
       return currentTodo;
     });
   },
-  setNewTodos(state: any, newTodos: Todo[]) {
+  setNewTodos(state, newTodos: Todo[]) {
     state.todos = newTodos;
   },
 };

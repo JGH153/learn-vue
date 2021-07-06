@@ -1,5 +1,3 @@
-import { ServerTodo } from "@/shared/models/server-todo.interface";
-import { Todo } from "@/shared/models/todo.interface";
 import Vue from "vue";
 import Vuex, { ActionTree, GetterTree, MutationTree } from "vuex";
 import { TodosModules } from "./modules/todos/todos.store";
@@ -7,6 +5,7 @@ import { RootStoreState } from "./root-store.state.interface";
 
 Vue.use(Vuex);
 
+//https://cli.vuejs.org/guide/mode-and-env.html#modes
 const production = process.env.NODE_ENV === "production";
 
 const initialState: () => RootStoreState = () => ({
