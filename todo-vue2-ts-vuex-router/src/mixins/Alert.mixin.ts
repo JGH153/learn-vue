@@ -9,4 +9,8 @@ export default class AlertMixin extends Vue {
   triggerAlert(message: string) {
     alert(this.alertPrefix + message);
   }
+
+  created(): void {
+    console.log("AlertMixin Mixin");
+  }
 }

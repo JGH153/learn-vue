@@ -11,7 +11,11 @@ import { mixins } from "vue-class-component";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class About extends mixins(AlertMixin) {}
+export default class About extends mixins(AlertMixin) {
+  created(): void {
+    console.log("About Comp");
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>
