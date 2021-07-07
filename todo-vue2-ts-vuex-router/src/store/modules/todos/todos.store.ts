@@ -4,8 +4,6 @@ import { RootStoreState } from "@/store/root-store.state.interface";
 import { ActionTree, GetterTree, MutationTree } from "vuex";
 import { TodosStoreState } from "./todos.store.interface";
 
-// TODO try divided pattern: https://stackoverflow.com/questions/53807294/how-is-the-correct-way-to-work-with-vuex-and-typescript
-
 const initialState: () => TodosStoreState = () => ({
   todos: [
     {

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/Home.vue";
+import NotFound from "../views/NotFound.vue";
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,11 @@ const routes: Array<RouteConfig> = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "todo" */ "../views/TodoPage.vue"),
   },
+  {
+    path: "/:catchAll(.*)",
+    component: NotFound,
+    name: "NotFound",
+  },
 ];
 
 const router = new VueRouter({
@@ -33,5 +39,13 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  console.log("Going from: ", from, " to: ", to);
+  next(); // nothing, false, error, or new route
+});
+
+// router.afterEach((to, from) => {
+// });
 
 export default router;
