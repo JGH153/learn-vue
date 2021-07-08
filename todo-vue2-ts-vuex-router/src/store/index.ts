@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex, { ActionTree, GetterTree, MutationTree } from "vuex";
 import { TodosModules } from "./modules/todos/todos.store";
+import { RootMutations } from "./root-store-mutations";
 import { RootStoreState } from "./root-store.state.interface";
 
 Vue.use(Vuex);
@@ -15,7 +16,7 @@ const initialState: () => RootStoreState = () => ({
 const state = initialState();
 
 const mutations = <MutationTree<RootStoreState>>{
-  setLoading(state, isLoading: boolean) {
+  [RootMutations.SET_LOADING](state, isLoading: boolean) {
     state.isLoading = isLoading;
   },
 };

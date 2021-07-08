@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { Todo } from "@/shared/models/todo.interface";
+import { TodosMutations } from "@/store/modules/todos/todos-mutations.enum";
 import { Component, Vue } from "vue-property-decorator";
 import { mapGetters, mapMutations } from "vuex";
 
@@ -14,7 +15,7 @@ import { mapGetters, mapMutations } from "vuex";
     ...mapGetters("todo", ["getLastId"]),
   },
   methods: {
-    ...mapMutations("todo", ["addNewTodo"]),
+    ...mapMutations("todo", { addNewTodo: TodosMutations.ADD_NEW_TODO }),
   },
 })
 export default class TodoInput extends Vue {
@@ -24,6 +25,7 @@ export default class TodoInput extends Vue {
   newTodoText = "";
 
   onTodoEnter(): void {
+    console.log(this);
     if (this.newTodoText === "") {
       return;
     }

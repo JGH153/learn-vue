@@ -14,13 +14,17 @@
 </template>
 
 <script lang="ts">
+import { TodosMutations } from "@/store/modules/todos/todos-mutations.enum";
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { mapMutations } from "vuex";
 import { Todo } from "../shared/models/todo.interface";
 
 @Component({
   methods: {
-    ...mapMutations("todo", ["toggleDone", "removeTodoById"]),
+    ...mapMutations("todo", {
+      toggleDone: TodosMutations.TOGGLE_DONE,
+      removeTodoById: TodosMutations.REMOVE_TODO_BY_ID,
+    }),
   },
 })
 export default class TodoListItem extends Vue {

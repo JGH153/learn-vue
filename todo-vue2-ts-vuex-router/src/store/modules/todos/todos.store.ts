@@ -1,7 +1,9 @@
 import { ServerTodo } from "@/shared/models/server-todo.interface";
 import { Todo } from "@/shared/models/todo.interface";
+import { RootMutations } from "@/store/root-store-mutations";
 import { RootStoreState } from "@/store/root-store.state.interface";
 import { ActionTree, GetterTree, MutationTree } from "vuex";
+import { TodosMutations } from "./todos-mutations.enum";
 import { TodosStoreState } from "./todos.store.interface";
 
 const initialState: () => TodosStoreState = () => ({
@@ -27,13 +29,13 @@ const initialState: () => TodosStoreState = () => ({
 const state = initialState();
 
 const mutations = <MutationTree<TodosStoreState>>{
-  addNewTodo(state, newTodo: Todo) {
+  [TodosMutations.ADD_NEW_TODO](state, newTodo: Todo) {
     state.todos = [...state.todos, newTodo];
   },
-  removeTodoById(state, id: number) {
+  [TodosMutations.REMOVE_TODO_BY_ID](state, id: number) {
     state.todos = state.todos.filter((currentTodo: Todo) => currentTodo.id !== id);
   },
-  toggleDone(state, id: number) {
+  [TodosMutations.TOGGLE_DONE](state, id: number) {
     state.todos = state.todos.map((currentTodo: Todo) => {
       if (currentTodo.id === id) {
         return {
@@ -44,7 +46,7 @@ const mutations = <MutationTree<TodosStoreState>>{
       return currentTodo;
     });
   },
-  setNewTodos(state, newTodos: Todo[]) {
+  [TodosMutations.SET_NEW_TODOS](state, newTodos: Todo[]) {
     state.todos = newTodos;
   },
 };
@@ -63,7 +65,7 @@ const getters = <GetterTree<TodosStoreState, RootStoreState>>{
 
 const actions = <ActionTree<TodosStoreState, RootStoreState>>{
   async loadTodos({ commit }) {
-    commit("setLoading", true, { root: true });
+    commit(RootMutations.SET_LOADING, true, { root: true });
     const response = await fetch("https://jsonplaceholder.typicode.com/todos/");
     // make it fake slower
     await new Promise((resolve) => {
@@ -78,8 +80,8 @@ const actions = <ActionTree<TodosStoreState, RootStoreState>>{
         done: current.completed,
       };
     });
-    commit("setNewTodos", mappedTodos);
-    commit("setLoading", false, { root: true });
+    commit(TodosMutations.SET_NEW_TODOS, mappedTodos);
+    commit(RootMutations.SET_LOADING, false, { root: true });
   },
 };
 
