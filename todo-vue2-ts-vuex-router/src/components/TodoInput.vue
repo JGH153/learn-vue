@@ -15,7 +15,7 @@ import { mapGetters, mapMutations } from "vuex";
     ...mapGetters("todo", ["getLastId"]),
   },
   methods: {
-    ...mapMutations("todo", { addNewTodo: TodosMutations.ADD_NEW_TODO }),
+    ...mapMutations("todo", [TodosMutations.ADD_NEW_TODO]),
   },
 })
 export default class TodoInput extends Vue {

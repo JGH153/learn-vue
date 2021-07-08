@@ -18,3 +18,4 @@ Add/test unit testing
 Structure (not just components)
 
 todo-vue2-ts-vuex-router
+HOC

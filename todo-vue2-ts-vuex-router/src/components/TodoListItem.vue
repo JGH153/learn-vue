@@ -21,10 +21,7 @@ import { Todo } from "../shared/models/todo.interface";
 
 @Component({
   methods: {
-    ...mapMutations("todo", {
-      toggleDone: TodosMutations.TOGGLE_DONE,
-      removeTodoById: TodosMutations.REMOVE_TODO_BY_ID,
-    }),
+    ...mapMutations("todo", [TodosMutations.TOGGLE_DONE, TodosMutations.REMOVE_TODO_BY_ID]),
   },
 })
 export default class TodoListItem extends Vue {
