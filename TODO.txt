@@ -6,7 +6,7 @@ Make:
 V With vue 2 + vuetify
 V With vue 2 + vuetify + TS
 X With vue 2 + vuetify + TS + TSX
-With vue 2 + vuetify + TS + vuex
+V With vue 2 + vuetify + TS + vuex
 With vue 3 + TS + comp API
 With vue 3 + TS + comp API + vuex?
 
@@ -16,6 +16,5 @@ Example project with Nuxt
 Add cypress TS
 Add/test unit testing
 Structure (not just components)
-
-todo-vue2-ts-vuex-router
 HOC
+Forms

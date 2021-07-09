@@ -1,19 +1,16 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <h1>My Vue 2 JS TODO APP!</h1>
-    <TodoInput @new-data-event="onNewTodo($event)" />
-    <TodoList
-      :todos="todos"
-      @remove-todo-id="removeTodo($event)"
-      @toggle-done-todo="toggleDone($event)"
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <h1>My Vue 3 JS TODO APP!</h1>
+  <TodoInput @new-data-event="onNewTodo($event)" />
+  <TodoList
+    :todos="todos"
+    @remove-todo-id="removeTodo($event)"
+    @toggle-done-todo="toggleDone($event)"
+  >
+    <template v-slot:default="slotProps"
+      >You have {{ slotProps.todosLeft }} things TODO!</template
     >
-      <template v-slot:default="slotProps"
-        >You have {{ slotProps.todosLeft | numberToText }} things
-        TODO!</template
-      >
-    </TodoList>
-  </div>
+  </TodoList>
 </template>
 
 <script>
@@ -87,10 +84,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }
 </style>
