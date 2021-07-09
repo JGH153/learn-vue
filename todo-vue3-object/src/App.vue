@@ -8,7 +8,8 @@
     @toggle-done-todo="toggleDone($event)"
   >
     <template v-slot:default="slotProps"
-      >You have {{ slotProps.todosLeft }} things TODO!</template
+      >You have {{ slotProps.elementLeftText }} ({{ slotProps.todosLeft }})
+      things TODO!</template
     >
   </TodoList>
 </template>

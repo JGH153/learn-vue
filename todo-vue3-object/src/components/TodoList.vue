@@ -10,7 +10,9 @@
       </li>
     </ul>
     <div v-if="todos.length === 0">All done!</div>
-    <h2><slot v-bind:todosLeft="todosLeft"></slot></h2>
+    <h2>
+      <slot :todosLeft="todosLeft" :elementLeftText="elementLeftText"></slot>
+    </h2>
   </div>
 </template>
 
@@ -36,6 +38,23 @@ export default {
         return this.todos.length;
       }
       return 0;
+    },
+    elementLeftText() {
+      if (isNaN(this.todosLeft) || this.todosLeft < 0 || this.todosLeft >= 10)
+        return this.todosLeft;
+      const texts = [
+        "Zero",
+        "One",
+        "Two",
+        "Three",
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine",
+      ];
+      return texts[this.todosLeft].toLowerCase();
     },
   },
 };

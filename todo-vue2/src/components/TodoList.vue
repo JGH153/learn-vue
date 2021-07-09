@@ -10,7 +10,7 @@
       </li>
     </ul>
     <div v-if="todos.length === 0">All done!</div>
-    <h2><slot v-bind:todosLeft="todosLeft"></slot></h2>
+    <h2><slot :todosLeft="todosLeft"></slot></h2>
   </div>
 </template>
 
