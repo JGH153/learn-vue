@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
 export default {
   name: "TodoListItem",
   props: {
@@ -24,22 +25,21 @@ export default {
       required: true,
     },
   },
-  data: () => {
-    return {
-      expanded: true,
-    };
-  },
-  methods: {
-    removeItem(id) {
-      this.expanded = !this.expanded;
+  setup(props, context) {
+    const expanded = ref(true);
+
+    function removeItem(id) {
+      expanded.value = !expanded.value;
 
       setTimeout(() => {
-        this.$emit("remove-todo-id", id);
+        context.emit("remove-todo-id", id);
       }, 200);
-    },
-    toggleDone(id) {
-      this.$emit("toggle-done-todo", id);
-    },
+    }
+    function toggleDone(id) {
+      context.emit("toggle-done-todo", id);
+    }
+
+    return { expanded, removeItem, toggleDone };
   },
 };
 </script>

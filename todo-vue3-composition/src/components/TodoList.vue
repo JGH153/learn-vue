@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { computed } from "@vue/runtime-core";
 import TodoListItem from "./TodoListItem.vue";
 export default {
   name: "TodoList",
@@ -29,35 +30,40 @@ export default {
       required: true,
     },
   },
-  created: function() {
-    console.log("TodoList created with: ", this.todos);
-  },
-  computed: {
-    todosLeft: function() {
-      if (Array.isArray(this.todos)) {
-        return this.todos.length;
-      }
-      return 0;
-    },
-    elementLeftText() {
-      if (isNaN(this.todosLeft) || this.todosLeft < 0 || this.todosLeft >= 10)
-        return this.todosLeft;
-      const texts = [
-        "Zero",
-        "One",
-        "Two",
-        "Three",
-        "Four",
-        "Five",
-        "Six",
-        "Seven",
-        "Eight",
-        "Nine",
-      ];
-      return texts[this.todosLeft].toLowerCase();
-    },
+  setup(props) {
+    const { todosLeft, elementLeftText } = useElementsLeft(props.todos);
+    console.log("TodoList created with: ", props.todos);
+    return { todosLeft, elementLeftText };
   },
 };
+
+function useElementsLeft(todos) {
+  const todosLeft = computed(() => {
+    if (Array.isArray(todos)) {
+      return todos.length;
+    }
+    return 0;
+  });
+  const elementLeftText = computed(() => {
+    if (isNaN(todosLeft.value) || todosLeft.value < 0 || todosLeft.value >= 10)
+      return todosLeft.value;
+    const texts = [
+      "Zero",
+      "One",
+      "Two",
+      "Three",
+      "Four",
+      "Five",
+      "Six",
+      "Seven",
+      "Eight",
+      "Nine",
+    ];
+    return texts[todosLeft.value].toLowerCase();
+  });
+
+  return { todosLeft, elementLeftText };
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

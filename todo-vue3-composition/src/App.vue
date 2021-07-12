@@ -3,7 +3,7 @@
   <h1>My Vue 3 JS TODO APP!</h1>
   <TodoInput @new-data-event="onNewTodo($event)" />
   <TodoList
-    :todos="todos"
+    :todos="todosList"
     @remove-todo-id="removeTodo($event)"
     @toggle-done-todo="toggleDone($event)"
   >
@@ -15,6 +15,9 @@
 </template>
 
 <script>
+// TODO fix/remove
+/* eslint-disable no-unused-vars */
+import { reactive, ref } from "@vue/reactivity";
 import TodoInput from "./components/TodoInput.vue";
 import TodoList from "./components/TodoList.vue";
 
@@ -24,58 +27,74 @@ export default {
     TodoInput,
     TodoList,
   },
-  setup() {},
-  data() {
-    return {
-      todos: [
-        {
-          id: 0,
-          done: false,
-          text: "Learn Vue 2",
-        },
-        {
-          id: 1,
-          done: false,
-          text: "Learn Vue 3",
-        },
-        {
-          id: 2,
-          done: false,
-          text: "Learn Vue 5",
-        },
-      ],
-    };
-  },
-  methods: {
-    onNewTodo(newTodo) {
-      this.todos.push({
-        id: this.getLastId() + 1,
-        done: false,
-        text: newTodo,
-      });
-    },
-    getLastId() {
-      if (this.todos.length > 0) {
-        return this.todos[this.todos.length - 1].id;
-      }
-      return 0;
-    },
-    removeTodo(id) {
-      this.todos = this.todos.filter((currentTodo) => currentTodo.id !== id);
-    },
-    toggleDone(id) {
-      this.todos = this.todos.map((currentTodo) => {
-        if (currentTodo.id === id) {
-          return {
-            ...currentTodo,
-            done: !currentTodo.done,
-          };
-        }
-        return currentTodo;
-      });
-    },
+  setup() {
+    const { todosList, removeTodo, toggleDone } = useTodoList();
+    const { onNewTodo } = useNewTodo(todosList);
+
+    return { todosList, removeTodo, toggleDone, onNewTodo };
   },
 };
+
+// all these function could be in there own file exported and re-used elsewhere
+function useTodoList() {
+  const todosList = ref([
+    {
+      id: 0,
+      done: false,
+      text: "Learn Vue 2",
+    },
+    {
+      id: 1,
+      done: false,
+      text: "Learn Vue 3",
+    },
+    {
+      id: 2,
+      done: false,
+      text: "Learn Vue 5",
+    },
+  ]);
+
+  function removeTodo(id) {
+    todosList.value = todosList.value.filter(
+      (currentTodo) => currentTodo.id !== id
+    );
+  }
+  function toggleDone(id) {
+    todosList.value = todosList.value.map((currentTodo) => {
+      if (currentTodo.id === id) {
+        return {
+          ...currentTodo,
+          done: !currentTodo.done,
+        };
+      }
+      return currentTodo;
+    });
+  }
+
+  return { todosList, removeTodo, toggleDone };
+}
+
+function useNewTodo(taskList) {
+  function getLastId() {
+    if (taskList.value.length > 0) {
+      return taskList.value[taskList.value.length - 1].id;
+    }
+    return 0;
+  }
+
+  function onNewTodo(newText) {
+    taskList.value.push(
+      reactive({
+        id: getLastId() + 1,
+        done: false,
+        text: newText,
+      })
+    );
+  }
+
+  return { onNewTodo };
+}
 </script>
 
 <style lang="scss">

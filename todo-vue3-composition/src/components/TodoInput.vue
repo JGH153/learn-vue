@@ -11,23 +11,27 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
 export default {
   name: "TodoInput",
-  data() {
-    return {
-      newTodoText: "",
-    };
-  },
-  methods: {
-    onTodoEnter() {
-      if (this.newTodoText === "") {
-        return;
-      }
-      this.$emit("new-data-event", this.newTodoText);
-      this.newTodoText = "";
-    },
+  setup(props, context) {
+    const { newTodoText, onTodoEnter } = useInputTodo(context.emit);
+    return { newTodoText, onTodoEnter };
   },
 };
+
+function useInputTodo(emit) {
+  const newTodoText = ref("");
+  function onTodoEnter() {
+    if (this.newTodoText === "") {
+      return;
+    }
+    emit("new-data-event", newTodoText.value); // what to do here?
+    newTodoText.value = "";
+  }
+
+  return { newTodoText, onTodoEnter };
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
