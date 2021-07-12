@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../pages/Home.vue";
-// import NotFound from "../pages/NotFound.vue";
+import NotFound from "../pages/NotFound.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,22 +17,21 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../pages/About.vue"),
   },
-  // TODO
-  // {
-  //   path: "/todo/:id",
-  //   name: "TodoPage",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "todo" */ "../pages/TodoPage.vue"),
-  // },
-  // TODO
-  // {
-  //   path: "/:catchAll(.*)",
-  //   component: NotFound,
-  //   name: "NotFound",
-  // },
+  {
+    path: "/todo/:id",
+    name: "TodoPage",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "todo" */ "../pages/TodoPage.vue"),
+  },
+  // TODO https://next.router.vuejs.org/guide/migration/index.html#removal-of-the-fallback-option
+  {
+    path: "/:catchAll(.*)",
+    component: NotFound,
+    name: "NotFound",
+  },
 ];
 
 const router = createRouter({

@@ -8,6 +8,7 @@
     >
       {{ todo.text }}</span
     >
+    <router-link :to="'/todo/' + todo.id">Open</router-link>
     <button class="x-button" @click="removeItem(todo.id)">X</button>
   </div>
   <!-- </v-expand-x-transition> -->
@@ -17,19 +18,19 @@
 import { ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { TodosMutations } from "@/store/modules/todos/todos-mutations.enum";
-import { defineComponent } from "@vue/runtime-core";
+import { defineComponent, PropType } from "@vue/runtime-core";
 import { StoreState } from "@/store/store.state.interface";
+import { Todo } from "@/shared/models/todo.interface";
 
 export default defineComponent({
   name: "TodoListItem",
   props: {
     todo: {
-      type: Object,
+      type: Object as PropType<Todo>,
       required: true,
     },
   },
   setup() {
-    // move props here?
     const store = useStore<StoreState>();
     const expanded = ref(true);
 

@@ -28,7 +28,6 @@ export default defineComponent({
 });
 
 function useInputTodo(store: Store<StoreState>) {
-  // todo type emit
   const newTodoText = ref("");
   function onTodoEnter() {
     if (newTodoText.value === "") {

@@ -16,8 +16,9 @@
 </template>
 
 <script lang="ts">
+import { Todo } from "@/shared/models/todo.interface";
 import { StoreState } from "@/store/store.state.interface";
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive, Ref, ref } from "vue";
 import { useStore } from "vuex";
 import TodoInput from "../components/TodoInput.vue";
 import TodoList from "../components/TodoList.vue";
@@ -32,8 +33,6 @@ export default defineComponent({
     const store = useStore<StoreState>();
     const { todosList, removeTodo, toggleDone } = useTodoList();
     const { onNewTodo } = useNewTodo(todosList);
-
-    // store.dispatch("todo/loadTodos");
 
     return {
       todosList,
@@ -85,7 +84,7 @@ function useTodoList() {
   return { todosList, removeTodo, toggleDone };
 }
 
-function useNewTodo(taskList: any) {
+function useNewTodo(taskList: Ref<Todo[]>) {
   function getLastId() {
     if (taskList.value.length > 0) {
       return taskList.value[taskList.value.length - 1].id;

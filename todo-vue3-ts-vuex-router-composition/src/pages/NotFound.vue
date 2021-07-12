@@ -5,10 +5,11 @@
 </template>
 
 <script lang="ts">
-// import { Component, Vue } from "vue-property-decorator";
+import { defineComponent } from "@vue/runtime-core";
 
-// @Component
-// export default class NotFound extends Vue {}
+export default defineComponent({
+  name: "NotFound",
+});
 </script>
 
 <style lang="scss" scoped></style>

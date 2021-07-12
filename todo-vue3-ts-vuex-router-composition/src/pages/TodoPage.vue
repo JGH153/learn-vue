@@ -8,36 +8,46 @@
 </template>
 
 <script lang="ts">
-// import { ServerTodo } from "@/shared/models/server-todo.interface";
-// import { Todo } from "@/shared/models/todo.interface";
-// import { Component, Vue, Watch } from "vue-property-decorator";
-// import { Route } from "vue-router";
+import { ServerTodo } from "@/shared/models/server-todo.interface";
+import { Todo } from "@/shared/models/todo.interface";
+import { defineComponent, Ref, ref, watch } from "vue";
+import { useRoute } from "vue-router";
 
-// @Component
-// export default class TodoPage extends Vue {
-//   todo: Todo | null = null; // cant be undefined
+export default defineComponent({
+  name: "TodoPage",
+  setup() {
+    const todo: Ref<Todo> | Ref<null> = ref(null);
+    const route = useRoute();
 
-//   @Watch("$route", { immediate: true, deep: true })
-//   onUrlChange(newVal: Route): void {
-//     console.log("route!", newVal);
-//     this.loadTodo(+newVal.params["id"]);
-//   }
+    watch(
+      () => route.params.id,
+      (newId) => {
+        console.log("new:", newId);
+        loadTodo(+newId);
+      },
+      { immediate: true }
+    );
 
-//   async loadTodo(id: number): Promise<void> {
-//     const response = await fetch("https://jsonplaceholder.typicode.com/todos/" + id);
-//     // make it fake slower
-//     await new Promise((resolve) => {
-//       setTimeout(resolve, 300);
-//     });
+    async function loadTodo(id: number): Promise<void> {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/todos/" + id
+      );
+      // make it fake slower
+      await new Promise((resolve) => {
+        setTimeout(resolve, 300);
+      });
 
-//     const serverTodo: ServerTodo = await response.json();
-//     this.todo = {
-//       id: serverTodo.id,
-//       text: serverTodo.title,
-//       done: serverTodo.completed,
-//     };
-//   }
-// }
+      const serverTodo: ServerTodo = await response.json();
+      todo.value = {
+        id: serverTodo.id,
+        text: serverTodo.title,
+        done: serverTodo.completed,
+      };
+    }
+
+    return { todo };
+  },
+});
 </script>
 
 <style lang="scss" scoped></style>
