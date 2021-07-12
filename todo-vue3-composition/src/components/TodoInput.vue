@@ -23,10 +23,10 @@ export default {
 function useInputTodo(emit) {
   const newTodoText = ref("");
   function onTodoEnter() {
-    if (this.newTodoText === "") {
+    if (newTodoText.value === "") {
       return;
     }
-    emit("new-data-event", newTodoText.value); // what to do here?
+    emit("new-data-event", newTodoText.value);
     newTodoText.value = "";
   }
 
