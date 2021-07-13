@@ -18,9 +18,10 @@
 
 <script lang="ts">
 import { TodosMutations } from "@/store/modules/todos/todos-mutations.enum";
+import { StoreModules } from "@/store/store-modules.enum";
 import { StoreState } from "@/store/store.state.interface";
 import { defineComponent, ref } from "@vue/composition-api";
-import { useStore } from "../shared/useHelpers";
+import { useStore, useStoreMutation } from "../shared/useHelpers";
 
 export default defineComponent({
   name: "TodoListItem",
@@ -38,11 +39,23 @@ export default defineComponent({
       expanded.value = !expanded.value;
 
       setTimeout(() => {
-        store.commit("todo/" + TodosMutations.REMOVE_TODO_BY_ID, id);
+        // store.commit("todo/" + TodosMutations.REMOVE_TODO_BY_ID, id); // alternative
+        useStoreMutation(
+          store,
+          StoreModules.Todo,
+          TodosMutations.REMOVE_TODO_BY_ID,
+          id
+        );
       }, 200);
     }
     function toggleDone(id: number) {
-      store.commit("todo/" + TodosMutations.TOGGLE_DONE, id);
+      // store.commit("todo/" + TodosMutations.TOGGLE_DONE, id); // alternative
+      useStoreMutation(
+        store,
+        StoreModules.Todo,
+        TodosMutations.TOGGLE_DONE,
+        id
+      );
     }
 
     return { expanded, removeItem, toggleDone };

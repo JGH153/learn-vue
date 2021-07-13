@@ -15,7 +15,7 @@ import { TodosMutations } from "@/store/modules/todos/todos-mutations.enum";
 import { StoreState } from "@/store/store.state.interface";
 import { defineComponent, ref } from "@vue/composition-api";
 import { Store } from "vuex";
-import { useStore } from "../shared/useHelpers";
+import { useStore, useStoreMutation } from "../shared/useHelpers";
 
 export default defineComponent({
   name: "TodoInput",
@@ -44,7 +44,8 @@ function useInputTodo(store: Store<StoreState>) {
       done: false,
       text: newTodoText,
     };
-    store.commit("todo/" + TodosMutations.ADD_NEW_TODO, newTodo);
+    // store.commit("todo/" + TodosMutations.ADD_NEW_TODO, newTodo); // alternative
+    useStoreMutation(store, "todo", TodosMutations.ADD_NEW_TODO, newTodo);
   }
 
   return { newTodoText, onTodoEnter };

@@ -17,6 +17,7 @@
 </template>
 
 <script lang="ts">
+import { StoreModules } from "@/store/store-modules.enum";
 import { StoreState } from "@/store/store.state.interface";
 import { computed, defineComponent } from "@vue/composition-api";
 import { Store } from "vuex";
@@ -30,17 +31,17 @@ export default defineComponent({
 
   setup() {
     const store = useStore<StoreState>();
-
-    const todos = computed(() => store.state.todo.todos);
-
+    const todos = computed(() => store.state[StoreModules.Todo].todos);
     const { todosLeft, elementLeftText } = useElementsLeft(store);
+
     console.log("TodoList created with: ", todos.value);
+
     return { todosLeft, elementLeftText, todos };
   },
 });
 
 function useElementsLeft(store: Store<StoreState>) {
-  const todosLeft = computed(() => store.state.todo.todos.length);
+  const todosLeft = computed(() => store.state[StoreModules.Todo].todos.length);
 
   const elementLeftText = computed(() => {
     if (isNaN(todosLeft.value) || todosLeft.value < 0 || todosLeft.value >= 10)

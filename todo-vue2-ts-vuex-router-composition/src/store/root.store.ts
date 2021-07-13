@@ -3,6 +3,7 @@ import Vuex, { ActionTree, GetterTree, MutationTree } from "vuex";
 import { TodosModules } from "./modules/todos/todos.store";
 import { RootMutations } from "./root-store-mutations";
 import { RootStoreState } from "./root-store.state.interface";
+import { StoreModules } from "./store-modules.enum";
 
 Vue.use(Vuex);
 
@@ -34,6 +35,6 @@ export default new Vuex.Store<RootStoreState>({
   actions,
   getters,
   modules: {
-    todo: TodosModules,
+    [StoreModules.Todo]: TodosModules,
   },
 });

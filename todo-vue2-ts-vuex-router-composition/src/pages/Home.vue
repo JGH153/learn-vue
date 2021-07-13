@@ -34,9 +34,10 @@ import {
   Ref,
   ref,
 } from "@vue/composition-api";
-import { useStore } from "../shared/useHelpers";
+import { useStore, useStoreAction } from "../shared/useHelpers";
 import TodoInput from "../components/TodoInput.vue";
 import TodoList from "../components/TodoList.vue";
+import { StoreModules } from "@/store/store-modules.enum";
 
 export default defineComponent({
   components: {
@@ -48,7 +49,8 @@ export default defineComponent({
     const { todosList, removeTodo, toggleDone } = useTodoList();
     const { onNewTodo } = useNewTodo(todosList);
 
-    store.dispatch("todo/loadTodos");
+    // store.dispatch("todo/loadTodos"); // alternative
+    useStoreAction(store, StoreModules.Todo, "loadTodos");
 
     return {
       todosList,
