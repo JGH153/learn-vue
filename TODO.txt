@@ -9,8 +9,10 @@ X With vue 2 + vuetify + TS + TSX
 V With vue 2 + vuetify + TS + vuex
 V With vue 3 + comp API
 V With vue 3 + comp API + TS + vuex
-	With vue 2 + comp API + TS + vuex
-	With vue 2 + object API + comp API + TS + vuex (Final?)
+	With vue 2 + vuetify + comp API + TS + vuex
+	With vue 2 + options API + comp API + TS + vuex (Final?)
+
+options api for simple comps and composition api for more complex + reuse
 	
 
 Example project with router
