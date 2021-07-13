@@ -84,7 +84,6 @@ const actions = <ActionTree<TodosStoreState, RootStoreState>>{
     });
     commit(TodosMutations.SET_NEW_TODOS, mappedTodos);
     commit(RootMutations.SET_LOADING, false, { root: true });
-    console.log("loaded!");
   },
 };
 

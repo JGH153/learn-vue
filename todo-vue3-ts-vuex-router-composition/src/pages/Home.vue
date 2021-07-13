@@ -34,6 +34,8 @@ export default defineComponent({
     const { todosList, removeTodo, toggleDone } = useTodoList();
     const { onNewTodo } = useNewTodo(todosList);
 
+    store.dispatch("todo/loadTodos");
+
     return {
       todosList,
       removeTodo,

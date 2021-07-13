@@ -33,7 +33,7 @@ export default defineComponent({
     const todos = computed(() => store.state.todo.todos);
 
     const { todosLeft, elementLeftText } = useElementsLeft(store);
-    console.log("TodoList created with: ", todos);
+    console.log("TodoList created with: ", todos.value);
     return { todosLeft, elementLeftText, todos };
   },
 });

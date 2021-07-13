@@ -23,7 +23,9 @@ export default defineComponent({
       () => route.params.id,
       (newId) => {
         console.log("new:", newId);
-        loadTodo(+newId);
+        if (newId) {
+          loadTodo(+newId);
+        }
       },
       { immediate: true }
     );
