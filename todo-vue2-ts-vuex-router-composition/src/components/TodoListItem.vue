@@ -17,17 +17,18 @@
 </template>
 
 <script lang="ts">
+import { Todo } from "@/shared/models/todo.interface";
 import { TodosMutations } from "@/store/modules/todos/todos-mutations.enum";
 import { StoreModules } from "@/store/store-modules.enum";
 import { StoreState } from "@/store/store.state.interface";
-import { defineComponent, ref } from "@vue/composition-api";
+import { defineComponent, PropType, ref } from "@vue/composition-api";
 import { useStore, useStoreMutation } from "../shared/useHelpers";
 
 export default defineComponent({
   name: "TodoListItem",
   props: {
     todo: {
-      type: Object, //  as PropType<Todo>
+      type: Object as PropType<Todo>,
       required: true,
     },
   },
