@@ -11,7 +11,8 @@
     "list-browser-support": "npx browserslist",
     "preview-build-locally": "serve -s dist",
     "lint-fix": "vue-cli-service lint --fix",
-    "update": "yarn upgrade-interactive --latest"
+    "update": "yarn upgrade-interactive --latest",
+    "format-prettier-all": "prettier --write ."
   },
   "dependencies": {
     "@vue/composition-api": "1.x.x",
