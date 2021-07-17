@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./../assets/logo.png" />
+    <img alt="Vue logo" src="@/assets/logo.png" />
     <h1>My Vue 2 JS TODO APP!</h1>
 
     <template v-if="isLoading">
@@ -34,9 +34,9 @@ import {
   Ref,
   ref,
 } from "@vue/composition-api";
-import { useStore, useStoreAction } from "../shared/useHelpers";
-import TodoInput from "../components/TodoInput.vue";
-import TodoList from "../components/TodoList.vue";
+import { useStore, useStoreAction } from "@/shared/useHelpers";
+import TodoInput from "@/components/TodoInput.vue";
+import TodoList from "@/components/TodoList.vue";
 import { StoreModules } from "@/store/store-modules.enum";
 
 export default defineComponent({

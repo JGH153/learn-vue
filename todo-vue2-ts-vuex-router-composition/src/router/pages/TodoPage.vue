@@ -11,7 +11,7 @@
 import { ServerTodo } from "@/shared/models/server-todo.interface";
 import { Todo } from "@/shared/models/todo.interface";
 import { defineComponent, Ref, ref, watch } from "@vue/composition-api";
-import { useRoute } from "../shared/useHelpers";
+import { useRoute } from "@/shared/useHelpers";
 
 export default defineComponent({
   name: "TodoPage",
