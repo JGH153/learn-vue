@@ -1,17 +1,11 @@
 <template>
   <div>
-    <input
-      type="text"
-      class="todo-input"
-      v-model="newTodoText"
-      @keydown.enter="onTodoEnter"
-      autofocus
-    />
+    <input type="text" class="todo-input" v-model="newTodoText" @keydown.enter="onTodoEnter" autofocus />
   </div>
 </template>
 
 <script lang="ts">
-import { TodosMutations } from "@/store/modules/todos/todos-mutations.enum";
+import { TodosMutations } from "@/store/modules/todos/todos.mutations.enum";
 import { StoreState } from "@/store/store.state.interface";
 import { defineComponent, ref } from "@vue/composition-api";
 import { Store } from "vuex";

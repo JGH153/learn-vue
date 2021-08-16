@@ -1,13 +1,7 @@
 <template>
   <v-expand-x-transition>
     <div class="list-item-container" v-show="expanded">
-      <span
-        class="todo-text"
-        @click="toggleDone(todo.id)"
-        :class="{ striked: todo.done }"
-      >
-        {{ todo.text }}</span
-      >
+      <span class="todo-text" @click="toggleDone(todo.id)" :class="{ striked: todo.done }"> {{ todo.text }}</span>
       <router-link :to="'/todo/' + todo.id">Open</router-link>
       <v-btn class="x-button" elevation="2" @click="removeItem(todo.id)">
         <v-icon>mdi-close</v-icon>
@@ -18,7 +12,7 @@
 
 <script lang="ts">
 import { Todo } from "@/shared/models/todo.interface";
-import { TodosMutations } from "@/store/modules/todos/todos-mutations.enum";
+import { TodosMutations } from "@/store/modules/todos/todos.mutations.enum";
 import { StoreModules } from "@/store/store-modules.enum";
 import { StoreState } from "@/store/store.state.interface";
 import { defineComponent, PropType, ref } from "@vue/composition-api";
@@ -41,22 +35,12 @@ export default defineComponent({
 
       setTimeout(() => {
         // store.commit("todo/" + TodosMutations.REMOVE_TODO_BY_ID, id); // alternative
-        useStoreMutation(
-          store,
-          StoreModules.Todo,
-          TodosMutations.REMOVE_TODO_BY_ID,
-          id
-        );
+        useStoreMutation(store, StoreModules.Todo, TodosMutations.REMOVE_TODO_BY_ID, id);
       }, 200);
     }
     function toggleDone(id: number) {
       // store.commit("todo/" + TodosMutations.TOGGLE_DONE, id); // alternative
-      useStoreMutation(
-        store,
-        StoreModules.Todo,
-        TodosMutations.TOGGLE_DONE,
-        id
-      );
+      useStoreMutation(store, StoreModules.Todo, TodosMutations.TOGGLE_DONE, id);
     }
 
     return { expanded, removeItem, toggleDone };

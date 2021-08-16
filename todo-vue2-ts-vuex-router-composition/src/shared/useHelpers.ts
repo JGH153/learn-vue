@@ -13,21 +13,12 @@ export function useStore<StoreType>(): Store<StoreType> {
 }
 
 // should be send store action?
-export function useStoreAction(
-  store: Store<StoreState>,
-  module: string,
-  element: string
-) {
+export function useStoreAction(store: Store<StoreState>, module: string, element: string) {
   return store.dispatch(`${getModulePath(module)}${element}`);
 }
 
 // should be send store action?
-export function useStoreMutation(
-  store: Store<StoreState>,
-  module: string,
-  element: string,
-  value?: any
-) {
+export function useStoreMutation(store: Store<StoreState>, module: string, element: string, value?: any) {
   if (value) {
     store.commit(`${getModulePath(module)}${element}`, value);
   } else {

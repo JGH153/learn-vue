@@ -4,20 +4,14 @@
     <h1>My Vue 2 JS TODO APP!</h1>
 
     <template v-if="isLoading">
-      <v-progress-circular
-        :size="70"
-        :width="7"
-        color="purple"
-        indeterminate
-      ></v-progress-circular>
+      <v-progress-circular :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
     </template>
 
     <template v-if="!isLoading">
       <TodoInput />
       <TodoList>
         <template v-slot:default="slotProps"
-          >You have {{ slotProps.elementLeftText }} ({{ slotProps.todosLeft }})
-          things TODO!</template
+          >You have {{ slotProps.elementLeftText }} ({{ slotProps.todosLeft }}) things TODO!</template
         >
       </TodoList>
     </template>
@@ -27,13 +21,7 @@
 <script lang="ts">
 import { Todo } from "@/shared/models/todo.interface";
 import { StoreState } from "@/store/store.state.interface";
-import {
-  computed,
-  defineComponent,
-  reactive,
-  Ref,
-  ref,
-} from "@vue/composition-api";
+import { computed, defineComponent, reactive, Ref, ref } from "@vue/composition-api";
 import { useStore, useStoreAction } from "@/shared/useHelpers";
 import TodoInput from "@/components/TodoInput.vue";
 import TodoList from "@/components/TodoList.vue";
@@ -64,7 +52,7 @@ export default defineComponent({
 
 // all these function could be in there own file exported and re-used elsewhere
 function useTodoList() {
-  const todosList = ref([
+  const todosList = ref<Todo[]>([
     {
       id: 0,
       done: false,
@@ -83,9 +71,7 @@ function useTodoList() {
   ]);
 
   function removeTodo(id: number): void {
-    todosList.value = todosList.value.filter(
-      (currentTodo) => currentTodo.id !== id
-    );
+    todosList.value = todosList.value.filter((currentTodo) => currentTodo.id !== id);
   }
   function toggleDone(id: number): void {
     todosList.value = todosList.value.map((currentTodo) => {

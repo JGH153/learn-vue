@@ -44,20 +44,8 @@ function useElementsLeft(store: Store<StoreState>) {
   const todosLeft = computed(() => store.state[StoreModules.Todo].todos.length);
 
   const elementLeftText = computed(() => {
-    if (isNaN(todosLeft.value) || todosLeft.value < 0 || todosLeft.value >= 10)
-      return todosLeft.value;
-    const texts = [
-      "Zero",
-      "One",
-      "Two",
-      "Three",
-      "Four",
-      "Five",
-      "Six",
-      "Seven",
-      "Eight",
-      "Nine",
-    ];
+    if (isNaN(todosLeft.value) || todosLeft.value < 0 || todosLeft.value >= 10) return todosLeft.value;
+    const texts = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
     return texts[todosLeft.value].toLowerCase();
   });
 

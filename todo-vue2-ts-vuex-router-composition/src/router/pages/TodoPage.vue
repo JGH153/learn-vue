@@ -30,9 +30,7 @@ export default defineComponent({
     );
 
     async function loadTodo(id: number): Promise<void> {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos/" + id
-      );
+      const response = await fetch("https://jsonplaceholder.typicode.com/todos/" + id);
       // make it fake slower
       await new Promise((resolve) => {
         setTimeout(resolve, 300);

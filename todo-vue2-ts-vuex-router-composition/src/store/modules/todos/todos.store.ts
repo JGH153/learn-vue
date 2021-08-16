@@ -1,9 +1,9 @@
 import { ServerTodo } from "@/shared/models/server-todo.interface";
 import { Todo } from "@/shared/models/todo.interface";
-import { RootMutations } from "@/store/root-store-mutations";
+import { RootMutations } from "@/store/root-store.mutations";
 import { RootStoreState } from "@/store/root-store.state.interface";
 import { ActionTree, GetterTree, MutationTree } from "vuex";
-import { TodosMutations } from "./todos-mutations.enum";
+import { TodosMutations } from "./todos.mutations.enum";
 import { TodosStoreState } from "./todos.store.interface";
 
 const initialState: () => TodosStoreState = () => ({
@@ -33,9 +33,7 @@ const mutations = <MutationTree<TodosStoreState>>{
     state.todos = [...state.todos, newTodo];
   },
   [TodosMutations.REMOVE_TODO_BY_ID](state, id: number) {
-    state.todos = state.todos.filter(
-      (currentTodo: Todo) => currentTodo.id !== id
-    );
+    state.todos = state.todos.filter((currentTodo: Todo) => currentTodo.id !== id);
   },
   [TodosMutations.TOGGLE_DONE](state, id: number) {
     state.todos = state.todos.map((currentTodo: Todo) => {

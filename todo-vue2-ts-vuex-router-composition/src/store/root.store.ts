@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex, { ActionTree, GetterTree, MutationTree } from "vuex";
 import { TodosModules } from "./modules/todos/todos.store";
-import { RootMutations } from "./root-store-mutations";
+import { RootMutations } from "./root-store.mutations";
 import { RootStoreState } from "./root-store.state.interface";
 import { StoreModules } from "./store-modules.enum";
 
