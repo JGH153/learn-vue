@@ -30,18 +30,19 @@ export default defineComponent({
     const store = useStore<StoreState>();
     const expanded = ref(true);
 
-    function removeItem(id: number) {
+    const removeItem = (id: number) => {
       expanded.value = !expanded.value;
 
       setTimeout(() => {
         // store.commit("todo/" + TodosMutations.REMOVE_TODO_BY_ID, id); // alternative
         useStoreMutation(store, StoreModules.Todo, TodosMutations.REMOVE_TODO_BY_ID, id);
       }, 200);
-    }
-    function toggleDone(id: number) {
+    };
+
+    const toggleDone = (id: number) => {
       // store.commit("todo/" + TodosMutations.TOGGLE_DONE, id); // alternative
       useStoreMutation(store, StoreModules.Todo, TodosMutations.TOGGLE_DONE, id);
-    }
+    };
 
     return { expanded, removeItem, toggleDone };
   },
